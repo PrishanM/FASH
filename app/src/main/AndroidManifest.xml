@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.evensel.android.fash" >
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name="com.evensel.android.fash.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/MyMaterialTheme" >
+
+        <activity
+            android:name="com.evensel.android.fash.SplashScreen"
+            android:label="FASH"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.evensel.android.fash.MainActivity"
+            android:label="FASH"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.ImageViewerActivity"
+            android:label="PRODUCT"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.SingleProductActivity"
+            android:label="PRODUCT"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.SingleProductActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.ShopActivity"
+            android:label="SHOPS"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.ShopActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.MoreShopsActivity"
+            android:label="ALL SHOPS"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.MoreShopsActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.ProductsActivity"
+            android:label="CATEGORY"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.ProductsActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.SearchResultActivity"
+            android:label="SEARCH RESULT"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.SearchResultActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.LocationActivity"
+            android:label="LOCATION"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.LocationActivity" />
+        </activity>
+
+        <!--<meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBEvGuBazDOC3vgt56qUloXfa66NfS_l8U" />-->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDyLQPHiKsS9d9bYfYirjpB6awnSdT806E" />
+
+    </application>
+
+</manifest>

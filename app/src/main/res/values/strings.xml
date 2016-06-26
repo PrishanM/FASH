@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">FASH</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_search">Search</string>
+
+    <string name="string_featured_products">Featured Products</string>
+    <string name="string_categories">Categories</string>
+    <string name="string_shops">Visit your favorite shops</string>
+
+    <string name="string_description">Description</string>
+    <string name="string_available_sizes">Sizes available</string>
+    <string name="string_available_locations">View Shop Locations on Map</string>
+
+    <string name="no_network_error">No internet connection.Please check your connection.</string>
+
+    <!-- Main Tab -->
+    <string name="string_home">Home</string>
+    <string name="string_men">Men</string>
+    <string name="string_women">Women</string>
+    <string name="string_kids">Kids</string>
+    <string name="string_accessories">Accessories</string>
+    <string name="string_about">About</string>
+
+    <!-- App URL -->
+    <string name="base_url">http://192.241.191.200/api/v1/</string>
+    <string name="featured_products_url">products/featured</string>
+    <string name="featured_shops_url">shops/featured</string>
+    <string name="single_product_url">products/</string>
+    <string name="categories_url">categories?</string>
+    <string name="category_products_url">search?</string>
+
+</resources>

@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background_layout_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:weightSum="5"
+            android:orientation="horizontal"
+            android:background="@drawable/navigation_background">
+
+            <TextView
+                android:id="@+id/tabHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_about"
+                android:gravity="center"
+                android:textColor="@color/txt_color_white"
+                android:layout_margin="6dp"/>
+
+            <TextView
+                android:id="@+id/tabWomen"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_women"
+                android:gravity="center"
+                android:textColor="@color/txt_color_white"
+                android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/tabMen"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_men"
+                android:gravity="center"
+                android:textColor="@color/txt_color_white"
+                android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/tabKids"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_kids"
+                android:gravity="center"
+                android:textColor="@color/txt_color_white"
+                android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/tabAccessories"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_accessories"
+                android:gravity="center"
+                android:textColor="@color/txt_color_white"
+                android:layout_margin="6dp"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/shopTabFrame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.0">
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

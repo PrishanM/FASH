@@ -1,0 +1,309 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/background_layout_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2.4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2.3"
+                    android:weightSum="2"
+                    android:orientation="vertical">
+
+                    <ViewStub
+                        android:id="@+id/loadingSpinnerProducts"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout="@layout/app_loading_screen" />
+
+                    <FrameLayout
+                        android:id="@+id/home_pagination_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2" >
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/featuredViewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.1"
+                    android:layout_marginTop="@dimen/margin_textview_new">
+
+                    <com.viewpagerindicator.CirclePageIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2.4"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/margin_textview_new"
+                android:layout_marginBottom="@dimen/margin_textview_new">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_fav_shop"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="@string/string_shops"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/heading_text_color"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:weightSum="2"
+                    android:orientation="vertical">
+
+                    <ViewStub
+                        android:id="@+id/loadingSpinnerShops"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout="@layout/app_loading_screen" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.9"
+                        android:weightSum="4"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout1"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout2"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout3"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout4"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                    <android.widget.Space
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp" />
+
+                    <LinearLayout
+                        android:id="@+id/viewTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.9"
+                        android:weightSum="4"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout5"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout6"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout7"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView7"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/layout8"
+                            app:cardUseCompatPadding="true"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="2dp"
+                            app:cardElevation="4dp"
+                            android:visibility="gone">
+                            <ImageView
+                                android:id="@+id/imgView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
+
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMoreShops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            android:src="@drawable/ic_more"
+            app:layout_anchor="@id/viewTwo"
+            app:layout_anchorGravity="bottom|right|end"
+            app:backgroundTint="@color/price_tag_color"
+            app:rippleColor="#FFFFFF" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

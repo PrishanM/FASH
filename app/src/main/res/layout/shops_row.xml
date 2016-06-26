@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:background="@drawable/listview_row_drawable">
+
+        <ImageView
+            android:id="@+id/imgView1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:visibility="visible"
+            android:layout_margin="@dimen/margin_textview"/>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/txtShopName"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/heading_text_color"
+                android:gravity="bottom"
+                android:text="Mind body and soul"
+                android:singleLine="false"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/txtShopSlogan"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/description_text"
+                android:gravity="top"
+                android:text="Mind body and soul"
+                android:singleLine="false"/>
+
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:visibility="visible"
+            android:layout_margin="@dimen/margin_textview"
+            android:src="@drawable/ic_gray_arrow"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
