@@ -59,7 +59,6 @@ public class SuperCategoryFragment extends Fragment {
             alertDialog = notifications.showNetworkNotification(getActivity());
             alertDialog.show();
         }
-        //test
         return rootView;
     }
 
