@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.evensel.android.fash.R;
+
 /**
  * Created by Prishan Maduka on 6/26/2016.
  */
@@ -15,6 +17,7 @@ public class ShopSuperCategoriesFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View rootView = inflater.inflate(R.layout.shop_supercategory_main_layout, container, false);
+        return rootView;
     }
 }
