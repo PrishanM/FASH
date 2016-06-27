@@ -3,7 +3,6 @@ package com.evensel.android.fash.fragments;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -27,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by prishanm on 6/21/2016.
+ * Created by Prishan Maduka on 6/21/2016.
  */
 public class SuperCategoryFragment extends Fragment {
 
@@ -43,7 +42,6 @@ public class SuperCategoryFragment extends Fragment {
     HomeSuperCategorySubCategoriesAdapter adapter;
     String superCategory = null;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.super_category_layout, container, false);
@@ -156,7 +154,7 @@ public class SuperCategoryFragment extends Fragment {
     private void getCategories() {
 
         loadingSpinnerCategories.setVisibility(View.VISIBLE);
-        JsonRequestManager.getInstance(getActivity()).getSuperCategoryCategoryList(getResources().getString(R.string.base_url) + getResources().getString(R.string.categories_url),superCategory, categoriesWithinSupercategoryCallback);
+        JsonRequestManager.getInstance(getActivity()).getSuperCategoryCategoryList(getResources().getString(R.string.base_url) + getResources().getString(R.string.categories_url), superCategory, categoriesWithinSupercategoryCallback);
         //setCategoryList();
     }
 
