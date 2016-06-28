@@ -156,7 +156,7 @@ public class SingleProductActivity extends AppCompatActivity {
         }
 
         if(singleProduct.getPrice()!=null){
-            txtPrice.setText(singleProduct.getPrice());
+            txtPrice.setText("$ "+ singleProduct.getPrice());
         }
 
         if(singleProduct.getCode()!=null){

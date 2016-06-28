@@ -21,17 +21,18 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by prishanm on 6/21/2016.
+ * Created by Prishan Maduka on 6/27/2016.
  */
-public class HomeSuperCategorySubCategoriesAdapter extends BaseAdapter {
+public class ShopSuperCategorySubCategoriesAdapter extends BaseAdapter{
 
     HashMap<Integer,List<HomeSuperCategory>> categoryMap;
     Context con;
 
-    public HomeSuperCategorySubCategoriesAdapter(HashMap<Integer,List<HomeSuperCategory>>  map,Context context){
+    public ShopSuperCategorySubCategoriesAdapter(HashMap<Integer,List<HomeSuperCategory>> map, Context context){
         this.categoryMap = map;
         this.con=context;
     }
+
     @Override
     public int getCount() {
         return categoryMap.size();

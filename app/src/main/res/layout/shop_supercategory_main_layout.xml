@@ -5,71 +5,23 @@
     android:layout_height="match_parent"
     android:weightSum="3"
     android:background="@color/background_layout_color">
-    
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="6dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:weightSum="2.1"
-        android:orientation="vertical">
-
-        <ViewStub
-            android:id="@+id/loadingSpinnerProducts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout="@layout/app_loading_screen" />
-
-        <FrameLayout
-            android:id="@+id/home_pagination_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_marginLeft="@dimen/margin_items"
-            android:layout_marginRight="@dimen/margin_items"
-            android:layout_marginBottom="@dimen/margin_textview_new"
-            android:layout_marginTop="@dimen/margin_textview_new">
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/featuredViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"/>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:layout_marginTop="@dimen/margin_textview_new"
-            android:layout_marginBottom="@dimen/margin_textview_new">
-
-            <com.viewpagerindicator.CirclePageIndicator
-                android:id="@+id/indicator"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.75"
+        android:layout_weight="3"
         android:weightSum="2"
         android:orientation="vertical"
-        android:background="@color/txt_color_white">
+        android:background="@drawable/category_drawable"
+        android:layout_marginLeft="@dimen/margin_items"
+        android:layout_marginRight="@dimen/margin_items"
+        android:layout_marginBottom="@dimen/margin_textview"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
             android:gravity="center"
             android:textSize="@dimen/text_size_normal"
             android:text="@string/string_categories"
@@ -90,7 +42,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.7"
+            android:layout_weight="1.8"
             android:orientation="vertical"
             android:weightSum="2">
 
@@ -127,7 +79,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

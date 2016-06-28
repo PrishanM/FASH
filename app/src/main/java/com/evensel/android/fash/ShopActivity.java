@@ -14,6 +14,11 @@ import android.widget.TextView;
 
 import com.evensel.android.fash.commons.AppConstants;
 import com.evensel.android.fash.fragments.AboutShopFragment;
+import com.evensel.android.fash.fragments.ShopSuperCategoriesFragment;
+import com.evensel.android.fash.network.JsonRequestManager;
+import com.evensel.android.fash.util.SuperCategory;
+
+import java.util.List;
 
 /**
  * @author Prishanm
@@ -69,11 +74,47 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         setFragment(new AboutShopFragment(), "0");
 
         tabHome.setBackgroundResource(R.drawable.shop_tab_selected);
+
+        getShopSuperCategories();
+    }
+
+    private void getShopSuperCategories() {
+        JsonRequestManager.getInstance(this).getShopSuperCategories(getResources().getString(R.string.base_url) + getResources().getString(R.string.shop_super_categories_url),shopId, shopSuperCategoriesCallback);
+    }
+
+    //Response callback for "Super categories within shop"
+    JsonRequestManager.getShopSuperCategoriesRequest shopSuperCategoriesCallback = new JsonRequestManager.getShopSuperCategoriesRequest() {
+        @Override
+        public void onSuccess(List<SuperCategory> list) {
+            if(list.size()>0)
+                setSuperCategories(list);
+        }
+
+        @Override
+        public void onError(String status) {
+
+        }
+    };
+
+    private void setSuperCategories(List<SuperCategory> list) {
+
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getName().equalsIgnoreCase("Women")){
+                tabWomen.setVisibility(View.VISIBLE);
+            }else if(list.get(i).getName().equalsIgnoreCase("Men")){
+                tabMen.setVisibility(View.VISIBLE);
+            }else if(list.get(i).getName().equalsIgnoreCase("Kids")){
+                tabKids.setVisibility(View.VISIBLE);
+            }else if(list.get(i).getName().equalsIgnoreCase("Accessories")){
+                tabAccessories.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     protected void setFragment(Fragment fragment,String superCategory) {
         Bundle args = new Bundle();
         args.putString("SUPER_CATEGORY", superCategory);
+        args.putInt("SHOP_ID", shopId);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
@@ -96,6 +137,54 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.tabHome:
+                setFragment(new AboutShopFragment(),"0");
+                tabHome.setBackgroundResource(R.drawable.shop_tab_selected);
+                tabWomen.setBackgroundResource(android.R.color.transparent);
+                tabMen.setBackgroundResource(android.R.color.transparent);
+                tabKids.setBackgroundResource(android.R.color.transparent);
+                tabAccessories.setBackgroundResource(android.R.color.transparent);
+
+                break;
+
+            case R.id.tabWomen:
+                setFragment(new ShopSuperCategoriesFragment(),"1");
+                tabWomen.setBackgroundResource(R.drawable.shop_tab_selected);
+                tabHome.setBackgroundResource(android.R.color.transparent);
+                tabMen.setBackgroundResource(android.R.color.transparent);
+                tabKids.setBackgroundResource(android.R.color.transparent);
+                tabAccessories.setBackgroundResource(android.R.color.transparent);
+                break;
+
+            case R.id.tabMen:
+                setFragment(new ShopSuperCategoriesFragment(),"2");
+                tabMen.setBackgroundResource(R.drawable.shop_tab_selected);
+                tabWomen.setBackgroundResource(android.R.color.transparent);
+                tabHome.setBackgroundResource(android.R.color.transparent);
+                tabKids.setBackgroundResource(android.R.color.transparent);
+                tabAccessories.setBackgroundResource(android.R.color.transparent);
+                break;
+
+            case R.id.tabKids:
+                setFragment(new ShopSuperCategoriesFragment(),"3");
+                tabKids.setBackgroundResource(R.drawable.shop_tab_selected);
+                tabWomen.setBackgroundResource(android.R.color.transparent);
+                tabMen.setBackgroundResource(android.R.color.transparent);
+                tabHome.setBackgroundResource(android.R.color.transparent);
+                tabAccessories.setBackgroundResource(android.R.color.transparent);
+                break;
+
+            case R.id.tabAccessories:
+                setFragment(new ShopSuperCategoriesFragment(),"4");
+                tabAccessories.setBackgroundResource(R.drawable.shop_tab_selected);
+                tabWomen.setBackgroundResource(android.R.color.transparent);
+                tabMen.setBackgroundResource(android.R.color.transparent);
+                tabKids.setBackgroundResource(android.R.color.transparent);
+                tabHome.setBackgroundResource(android.R.color.transparent);
+                break;
+        }
 
     }
 }

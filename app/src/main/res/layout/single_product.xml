@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.4"
+            android:layout_weight="1.2"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:weightSum="2.4"
             card_view:cardCornerRadius="4dp">
@@ -96,38 +96,14 @@
                     android:orientation="horizontal"
                     android:weightSum="1">
 
-                    <ScrollView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.4"
-                        android:scrollbars="vertical"
-                        android:fillViewport="true">
-
-                        <TextView
-                            android:id="@+id/txtName"
-                            android:layout_width="match_parent"
-                            android:layout_height="fill_parent"
-                            android:text=""
-                            android:textSize="@dimen/text_size_normal"
-                            android:textColor="@color/heading_text_color"
-                            android:singleLine="false"
-                            android:gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/margin_textview"
-                            android:textStyle="bold"/>
-
-                    </ScrollView>
-
-
-
                     <TextView
                         android:id="@+id/txtPrice"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.3"
+                        android:layout_weight="0.4"
                         android:text=""
                         android:textSize="@dimen/text_size_normal"
-                        android:background="@color/price_tag_color"
-                        android:textColor="@color/txt_color_white"
+                        android:textColor="@color/description_text"
                         android:gravity="center"
                         android:layout_margin="@dimen/margin_textview"/>
 
@@ -142,7 +118,17 @@
                         android:gravity="center"
                         android:layout_margin="@dimen/margin_textview"/>
 
-
+                    <TextView
+                        android:id="@+id/txtBuy"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:text="Buy Now"
+                        android:textSize="@dimen/text_size_normal"
+                        android:background="@color/price_tag_color"
+                        android:textColor="@color/txt_color_white"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/margin_textview"/>
 
 
                 </LinearLayout>
@@ -164,7 +150,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -175,9 +161,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2.4"
-                android:weightSum="3"
+                android:weightSum="3.4"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_textview">
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:textColor="@color/heading_text_color"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/text_size_normal"
+                    android:text="@string/string_description"
+                    android:layout_weight="0.6"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/normal_text_color"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,8 +193,7 @@
                         android:textColor="@color/heading_text_color"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/text_size_normal"
-                        android:text="@string/string_description"
-                        android:textStyle="bold"/>
+                        android:text="@string/string_description"/>
 
                     <ScrollView
                         android:layout_width="match_parent"
@@ -247,8 +247,7 @@
                             android:textColor="@color/heading_text_color"
                             android:gravity="center_vertical"
                             android:textSize="@dimen/text_size_normal"
-                            android:text="@string/string_available_sizes"
-                            android:textStyle="bold"/>
+                            android:text="@string/string_available_sizes"/>
 
 
                     </LinearLayout>
@@ -365,7 +364,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.9"
+                    android:layout_weight="0.7"
                     android:weightSum="2"
                     android:orientation="vertical">
 
@@ -377,8 +376,7 @@
                         android:textColor="@color/heading_text_color"
                         android:gravity="center_vertical"
                         android:textSize="@dimen/text_size_normal"
-                        android:text="@string/string_available_locations"
-                        android:textStyle="bold"/>
+                        android:text="@string/string_available_locations"/>
 
                     <ScrollView
                         android:layout_width="match_parent"

@@ -59,7 +59,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
             android:visibility="visible"
             android:layout_margin="@dimen/margin_textview"
             android:src="@drawable/ic_gray_arrow"/>

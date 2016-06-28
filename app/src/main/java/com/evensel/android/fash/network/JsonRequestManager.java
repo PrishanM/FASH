@@ -13,12 +13,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.evensel.android.fash.AppController;
-import com.evensel.android.fash.util.Category;
 import com.evensel.android.fash.util.FeaturedProduct;
 import com.evensel.android.fash.util.HomeSuperCategory;
 import com.evensel.android.fash.util.ShopDetail;
 import com.evensel.android.fash.util.SingleCategory;
 import com.evensel.android.fash.util.SingleProduct;
+import com.evensel.android.fash.util.SuperCategory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
@@ -105,10 +105,10 @@ public class JsonRequestManager {
 		void onError(String status);
 	}
 	
-	public void getFeaturedProducts(String url,
+	public void getFeaturedProducts(String url,String superCategory,
 			final getFeaturedProductsRequest callback) {
 
-		String fullUrl = url;
+		String fullUrl = url+"superCategory="+superCategory;
 
 		JsonArrayRequest req = new JsonArrayRequest(fullUrl,
 				new Response.Listener<JSONArray>() {
@@ -203,65 +203,6 @@ public class JsonRequestManager {
 
 	}
 
-
-	/******************************************************************************************************************************************/
-
-
-	/**
-	 * Get Featured Shops & All Shops Requests
-	 **/
-	public static interface getCategoriesRequest {
-		void onSuccess(List<Category> categoryList);
-
-		void onError(String status);
-	}
-
-	public void getCategories(String url,int shopId,
-								 final getCategoriesRequest callback) {
-
-		String fullUrl = url+shopId+"/categories";
-
-		JsonArrayRequest req = new JsonArrayRequest(fullUrl,
-				new Response.Listener<JSONArray>() {
-					@Override
-					public void onResponse(JSONArray response) {
-						Log.d("responseString", response.toString());
-						ObjectMapper mapper = new ObjectMapper();
-						List<Category> categories = new ArrayList<Category>();
-
-						try {
-							for (int i = 0; i < response.length(); i++) {
-								JSONObject jObj = response.getJSONObject(i);
-								Category category = mapper.readValue(jObj.toString(), Category.class);
-								categories.add(category);
-							}
-							callback.onSuccess(categories);
-							mapper = null;
-						} catch (Exception e) {
-							callback.onError("Error occured");
-						}
-
-					}
-				}, new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				callback.onError(VolleyErrorHelper.getMessage(error,
-						mCtx));
-			}
-		});
-
-		req.setRetryPolicy(new DefaultRetryPolicy(30000,
-				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-		// Adding request to request queue
-		AppController.getInstance().addToRequestQueue(req,
-				tag_json_arry);
-
-		// Cancelling request
-		//AppController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
-
-	}
 
 
 	/******************************************************************************************************************************************/
@@ -586,6 +527,119 @@ public class JsonRequestManager {
 
 		// Cancelling request
 		//AppController.getInstance().getRequestQueue().cancelAll(tag_json_arry);
+
+	}
+
+
+	/******************************************************************************************************************************************/
+
+	/**
+	 * Get Super Categories Requests
+	 **/
+	public static interface getShopSuperCategoriesRequest {
+		void onSuccess(List<SuperCategory> superCategoryList);
+
+		void onError(String status);
+	}
+
+	public void getShopSuperCategories(String url,int shopId,final getShopSuperCategoriesRequest callback) {
+
+
+		String fullUrl = url+"shop="+shopId;
+
+		JsonArrayRequest req = new JsonArrayRequest(fullUrl,
+				new Response.Listener<JSONArray>() {
+					@Override
+					public void onResponse(JSONArray response) {
+						Log.d("responseString xxx", response.toString());
+						ObjectMapper mapper = new ObjectMapper();
+						List<SuperCategory> categoriesList = new ArrayList<SuperCategory>();
+
+						try {
+							for (int i = 0; i < response.length(); i++) {
+								JSONObject jObj = response.getJSONObject(i);
+								SuperCategory superCategory = mapper.readValue(jObj.toString(), SuperCategory.class);
+								categoriesList.add(superCategory);
+							}
+							callback.onSuccess(categoriesList);
+							mapper = null;
+						} catch (Exception e) {
+							callback.onError("Error occured");
+						}
+
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				callback.onError(VolleyErrorHelper.getMessage(error,
+						mCtx));
+			}
+		});
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+
+	/******************************************************************************************************************************************/
+
+	/**
+	 * Get Categories of Super Categories(Inside shops) Requests
+	 **/
+	public static interface getShopCategoryListRequest {
+		void onSuccess(List<HomeSuperCategory> homeSuperCategoryList);
+
+		void onError(String status);
+	}
+
+	public void getShopCategoryList(String url,String superCategory,int shopId,final getShopCategoryListRequest callback) {
+
+
+		String fullUrl = url+"superCategory="+superCategory+"&shop="+shopId;
+
+		JsonArrayRequest req = new JsonArrayRequest(fullUrl,
+				new Response.Listener<JSONArray>() {
+					@Override
+					public void onResponse(JSONArray response) {
+						ObjectMapper mapper = new ObjectMapper();
+						List<HomeSuperCategory> categories = new ArrayList<HomeSuperCategory>();
+
+						try {
+							for (int i = 0; i < response.length(); i++) {
+								JSONObject jObj = response.getJSONObject(i);
+								HomeSuperCategory superCategory = mapper.readValue(jObj.toString(), HomeSuperCategory.class);
+								categories.add(superCategory);
+							}
+							callback.onSuccess(categories);
+							mapper = null;
+						} catch (Exception e) {
+							callback.onError("Error occured");
+						}
+
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				callback.onError(VolleyErrorHelper.getMessage(error,
+						mCtx));
+			}
+		});
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
 
 	}
 

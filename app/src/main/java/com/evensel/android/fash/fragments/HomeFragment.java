@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private void getFeaturedProducts() {
         loadingSpinnerProducts.setVisibility(View.VISIBLE);
 
-        JsonRequestManager.getInstance(getActivity()).getFeaturedProducts(getResources().getString(R.string.base_url) + getResources().getString(R.string.featured_products_url), featuredProductsRequestCallback);
+        JsonRequestManager.getInstance(getActivity()).getFeaturedProducts(getResources().getString(R.string.base_url) + getResources().getString(R.string.featured_products_url),"0", featuredProductsRequestCallback);
     }
 
     //Execute Http request call for "FEATURED SHOPS"

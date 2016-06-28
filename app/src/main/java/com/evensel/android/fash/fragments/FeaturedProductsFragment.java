@@ -54,14 +54,14 @@ public class FeaturedProductsFragment extends Fragment implements View.OnClickLi
         layout3 = (LinearLayout)rootView.findViewById(R.id.layout3);
 
 
-        /*imgView1.setOnClickListener(this);
+        imgView1.setOnClickListener(this);
         imgView2.setOnClickListener(this);
         imgView3.setOnClickListener(this);
 
         title = getArguments().getStringArrayList("TITLE");
         price = getArguments().getStringArrayList("PRICE");
         image = getArguments().getStringArrayList("IMAGE");
-        ids = getArguments().getIntegerArrayList("ID");*/
+        ids = getArguments().getIntegerArrayList("ID");
 
         imageLoader = AppController.getInstance().getImageLoader();
 
@@ -72,22 +72,19 @@ public class FeaturedProductsFragment extends Fragment implements View.OnClickLi
     private void setData() {
         for(int i=0;i<3;i++){
             if(i==0){
-                /*setImageView(image.get(i).toString(), imgView1);
+                setImageView(image.get(i).toString(), imgView1);
                 title1.setText(title.get(i).toString());
-                price1.setText(price.get(i).toString());*/
-                imgView1.setImageResource(R.drawable.a);
+                price1.setText("$ " + price.get(i).toString());
                 layout1.setVisibility(View.VISIBLE);
             }else if(i==1){
-                /*setImageView(image.get(i).toString(), imgView2);
+                setImageView(image.get(i).toString(), imgView2);
                 title2.setText(title.get(i).toString());
-                price2.setText(price.get(i).toString());*/
-                imgView2.setImageResource(R.drawable.a);
+                price2.setText("$ " + price.get(i).toString());
                 layout2.setVisibility(View.VISIBLE);
             }else if(i==2){
-                /*setImageView(image.get(i).toString(), imgView3);
+                setImageView(image.get(i).toString(), imgView3);
                 title3.setText(title.get(i).toString());
-                price3.setText(price.get(i).toString());*/
-                imgView3.setImageResource(R.drawable.a);
+                price3.setText("$ " + price.get(i).toString());
                 layout3.setVisibility(View.VISIBLE);
             }
         }

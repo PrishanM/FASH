@@ -63,7 +63,7 @@ public class SuperCategoryFragment extends Fragment {
     private void getFeaturedProducts() {
 
         loadingSpinnerProducts.setVisibility(View.VISIBLE);
-        JsonRequestManager.getInstance(getActivity()).getFeaturedProducts(getResources().getString(R.string.base_url) + getResources().getString(R.string.featured_products_url), featuredProductsRequestCallback);
+        JsonRequestManager.getInstance(getActivity()).getFeaturedProducts(getResources().getString(R.string.base_url) + getResources().getString(R.string.featured_products_url), superCategory,featuredProductsRequestCallback);
 
     }
 
@@ -82,7 +82,7 @@ public class SuperCategoryFragment extends Fragment {
         @Override
         public void onSuccess(List<FeaturedProduct> list) {
             loadingSpinnerProducts.setVisibility(View.GONE);
-            //if(list.size()>0)
+            if(list.size()>0)
                 setViewPagerFragments(list);
 
             getCategories();
@@ -100,10 +100,10 @@ public class SuperCategoryFragment extends Fragment {
         FeaturedProductsFragment productsFragment;
         fList = new ArrayList<Fragment>();
 
-        int arraySize = 5;//(int)Math.ceil(list.size()/3.0);
+        int arraySize = (int)Math.ceil(list.size()/3.0);
 
         for (int i=0;i<arraySize;i++){
-            /*ArrayList<String> dataTitle = new ArrayList<String>();
+            ArrayList<String> dataTitle = new ArrayList<String>();
             ArrayList<String> dataPrice = new ArrayList<String>();
             ArrayList<String> dataImage = new ArrayList<String>();
             ArrayList<Integer> dataID = new ArrayList<Integer>();
@@ -132,13 +132,13 @@ public class SuperCategoryFragment extends Fragment {
                 }
             }catch (IndexOutOfBoundsException e){
 
-            }*/
+            }
 
             Bundle args = new Bundle();
-            /*args.putStringArrayList("TITLE", dataTitle);
+            args.putStringArrayList("TITLE", dataTitle);
             args.putStringArrayList("IMAGE", dataImage);
             args.putStringArrayList("PRICE",dataPrice);
-            args.putIntegerArrayList("ID", dataID);*/
+            args.putIntegerArrayList("ID", dataID);
             productsFragment = new FeaturedProductsFragment();
             productsFragment.setArguments(args);
             fList.add(productsFragment);

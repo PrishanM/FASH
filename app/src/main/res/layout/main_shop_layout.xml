@@ -14,6 +14,7 @@
             android:layout_weight="0.2"
             android:weightSum="5"
             android:orientation="horizontal"
+            android:gravity="center"
             android:background="@drawable/navigation_background">
 
             <TextView
@@ -36,7 +37,8 @@
                 android:text="@string/string_women"
                 android:gravity="center"
                 android:textColor="@color/txt_color_white"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/tabMen"
                 android:layout_width="0dp"
@@ -46,7 +48,8 @@
                 android:text="@string/string_men"
                 android:gravity="center"
                 android:textColor="@color/txt_color_white"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/tabKids"
                 android:layout_width="0dp"
@@ -56,7 +59,8 @@
                 android:text="@string/string_kids"
                 android:gravity="center"
                 android:textColor="@color/txt_color_white"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/tabAccessories"
                 android:layout_width="0dp"
@@ -66,7 +70,8 @@
                 android:text="@string/string_accessories"
                 android:gravity="center"
                 android:textColor="@color/txt_color_white"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
