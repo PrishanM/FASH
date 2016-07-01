@@ -1,14 +1,21 @@
 package com.evensel.android.fash.fragments;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,10 +25,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.evensel.android.fash.AppController;
 import com.evensel.android.fash.R;
+import com.evensel.android.fash.SearchResultActivity;
 import com.evensel.android.fash.adapters.PagerAdapter;
 import com.evensel.android.fash.commons.AppConstants;
 import com.evensel.android.fash.commons.Notifications;
 import com.evensel.android.fash.network.DetectNetwork;
+import com.evensel.android.fash.network.JsonRequestManager;
+import com.evensel.android.fash.util.Datum;
+import com.evensel.android.fash.util.SingleCategory;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -30,11 +41,12 @@ import java.util.List;
 /**
  * Created by prishanm on 6/21/2016.
  */
-public class AboutShopFragment extends Fragment {
+public class AboutShopFragment extends Fragment implements SearchView.OnQueryTextListener{
 
     private ViewPager mViewPager = null;
     private CirclePageIndicator circlePageIndicator = null;
     private PagerAdapter pagerAdapter;
+    ProgressDialog progressDialog;
     Notifications notifications;
     AlertDialog alertDialog;
     ImageView shopLogo;
@@ -43,12 +55,17 @@ public class AboutShopFragment extends Fragment {
     List<Fragment> fList = null;
     private Handler sliderHandler = new Handler();
     public static final int DELAY = 5000;
-    int sliderPosition=0;
+    int sliderPosition=0,pageNoOther=1;
+    String searchQuery="";
+    List<Datum> searchList = new ArrayList<Datum>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.shop_layout, container, false);
+        setHasOptionsMenu(true);
+
+        notifications = new Notifications();
 
         initUI(rootView);
 
@@ -138,10 +155,6 @@ public class AboutShopFragment extends Fragment {
         }
     };
 
-    private void setShopImages() {
-
-    }
-
     private void initUI(View rootView) {
         mViewPager = (ViewPager)rootView.findViewById(R.id.featuredViewPager);
         loadingSpinnerImages = (View)rootView.findViewById(R.id.loadingSpinnerProducts);
@@ -186,8 +199,93 @@ public class AboutShopFragment extends Fragment {
 
     @Override
     public void onResume() {
+        searchList.clear();
+        pageNoOther=1;
         super.onResume();
         sliderHandler.postDelayed(ViewPagerVisibleScroll, DELAY);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //inflater.inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        progressDialog = ProgressDialog.show(getActivity(), null,
+                "Searching Data...", true);
+        progressDialog.setCancelable(true);
+        searchQuery = query;
+        getSearchResult(searchQuery, pageNoOther);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    //Requesting SEARCH DATA
+    private void getSearchResult(String query,int page) {
+        JsonRequestManager.getInstance(getActivity()).getShopSuperCategorySearchList(getResources().getString(R.string.base_url) + getResources().getString(R.string.category_products_url), query, AppConstants.getShopDetail().getId(), 0, page, getShopSearchListRequestCallback);
+
+    }
+
+    //Response callback for "MASTER SEARCH RESULT"
+    JsonRequestManager.getShopSuperCategorySearchListRequest getShopSearchListRequestCallback = new JsonRequestManager.getShopSuperCategorySearchListRequest() {
+        @Override
+        public void onSuccess(SingleCategory category) {
+
+            if(category.getData().size()>0)
+                checkMoreNew(category);
+            else{
+                if(progressDialog!=null){
+                    progressDialog.dismiss();
+                }
+
+                alertDialog = notifications.showHttpErrorDialog(getActivity(),"No data found");
+                alertDialog.show();
+            }
+
+        }
+
+        @Override
+        public void onError(String status) {
+            if(progressDialog!=null){
+                progressDialog.dismiss();
+            }
+            alertDialog = notifications.showHttpErrorDialog(getActivity(),"No data found");
+            alertDialog.show();
+        }
+    };
+
+    //Check for more data to be downloaded
+    private void checkMoreNew(SingleCategory category) {
+        for(int i=0;i<category.getData().size();i++){
+            searchList.add(category.getData().get(i));
+        }
+
+        if(category.getNextPageUrl()!=null){
+            pageNoOther = pageNoOther+1;
+            getSearchResult(searchQuery,pageNoOther);
+        } else {
+            if(progressDialog!=null)
+                progressDialog.dismiss();
+            pageNoOther=1;
+            AppConstants.setMasterSearchList(searchList);
+            if(AppConstants.getMasterSearchList().size()>0)
+                setData();
+        }
+    }
+
+    //Set data list to search layout
+    private void setData() {
+        Intent intent = new Intent(getActivity(),SearchResultActivity.class);
+        startActivity(intent);
     }
 }

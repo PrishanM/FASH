@@ -2,6 +2,7 @@ package com.evensel.android.fash.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.evensel.android.fash.AppController;
+import com.evensel.android.fash.ProductsActivity;
 import com.evensel.android.fash.R;
 import com.evensel.android.fash.util.HomeSuperCategory;
 
@@ -27,10 +29,12 @@ public class ShopSuperCategorySubCategoriesAdapter extends BaseAdapter{
 
     HashMap<Integer,List<HomeSuperCategory>> categoryMap;
     Context con;
+    int shopId;
 
-    public ShopSuperCategorySubCategoriesAdapter(HashMap<Integer,List<HomeSuperCategory>> map, Context context){
+    public ShopSuperCategorySubCategoriesAdapter(HashMap<Integer,List<HomeSuperCategory>> map, Context context,int shopId){
         this.categoryMap = map;
         this.con=context;
+        this.shopId = shopId;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class ShopSuperCategorySubCategoriesAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = null;
         ImageLoader imageLoader = AppController.getInstance().getImageLoader();
         if (convertView == null) {
@@ -131,6 +135,39 @@ public class ShopSuperCategorySubCategoriesAdapter extends BaseAdapter{
             });
             txtName3.setText(categoryMap.get(position).get(2).getName());
         }
+
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent productsActivity1 = new Intent(con,ProductsActivity.class);
+                productsActivity1.putExtra("ID", categoryMap.get(position).get(0).getId());
+                productsActivity1.putExtra("TITLE",categoryMap.get(position).get(0).getName());
+                productsActivity1.putExtra("SHOP_ID",shopId);
+                con.startActivity(productsActivity1);
+            }
+        });
+
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent productsActivity2 = new Intent(con,ProductsActivity.class);
+                productsActivity2.putExtra("ID", categoryMap.get(position).get(1).getId());
+                productsActivity2.putExtra("TITLE",categoryMap.get(position).get(1).getName());
+                productsActivity2.putExtra("SHOP_ID",shopId);
+                con.startActivity(productsActivity2);
+            }
+        });
+
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent productsActivity3 = new Intent(con,ProductsActivity.class);
+                productsActivity3.putExtra("ID", categoryMap.get(position).get(2).getId());
+                productsActivity3.putExtra("TITLE",categoryMap.get(position).get(2).getName());
+                productsActivity3.putExtra("SHOP_ID",shopId);
+                con.startActivity(productsActivity3);
+            }
+        });
 
         return convertView;
     }

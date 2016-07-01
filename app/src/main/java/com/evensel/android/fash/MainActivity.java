@@ -1,33 +1,56 @@
 package com.evensel.android.fash;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.evensel.android.fash.commons.AppConstants;
+import com.evensel.android.fash.commons.Notifications;
 import com.evensel.android.fash.fragments.HomeFragment;
 import com.evensel.android.fash.fragments.SuperCategoryFragment;
+import com.evensel.android.fash.network.DetectNetwork;
+import com.evensel.android.fash.network.JsonRequestManager;
+import com.evensel.android.fash.util.Datum;
+import com.evensel.android.fash.util.SingleCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Prishanm
  * Used handle all the events in the HOME screen
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,SearchView.OnQueryTextListener{
 
     TextView tabHome,tabWomen,tabMen,tabKids,tabAccessories;
+    ProgressDialog progressDialog;
+    Notifications notifications;
+    int pageNoOther=1;
+    String searchQuery="";
+    AlertDialog alertDialog;
+    List<Datum> searchList = new ArrayList<Datum>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        notifications = new Notifications();
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -44,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //abar.setHomeButtonEnabled(true);
 
         initUI();
+
+        DetectNetwork.setmContext(this);
     }
 
     private void initUI() {
@@ -85,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -194,4 +223,92 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        //Check network connectivity
+        if(DetectNetwork.isConnected()){
+            progressDialog = ProgressDialog.show(MainActivity.this, null,
+                    "Searching Data...", true);
+            progressDialog.setCancelable(true);
+            searchQuery = query;
+            getSearchResult(searchQuery, pageNoOther);
+        }else{
+            alertDialog = notifications.showNetworkNotification(MainActivity.this);
+            alertDialog.show();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    //Requesting SEARCH DATA
+    private void getSearchResult(String query,int page) {
+        JsonRequestManager.getInstance(MainActivity.this).getMasterSearchList(getResources().getString(R.string.base_url) + getResources().getString(R.string.category_products_url), query, page, getShopSearchListRequestCallback);
+
+    }
+
+    //Response callback for "MASTER SEARCH RESULT"
+    JsonRequestManager.getMasterSearchListRequest getShopSearchListRequestCallback = new JsonRequestManager.getMasterSearchListRequest() {
+        @Override
+        public void onSuccess(SingleCategory category) {
+
+            if(category.getData().size()>0)
+                checkMoreNew(category);
+            else{
+                if(progressDialog!=null){
+                    progressDialog.dismiss();
+                }
+
+                alertDialog = notifications.showHttpErrorDialog(MainActivity.this,"No data found");
+                alertDialog.show();
+            }
+
+        }
+
+        @Override
+        public void onError(String status) {
+            if(progressDialog!=null){
+                progressDialog.dismiss();
+            }
+            alertDialog = notifications.showHttpErrorDialog(MainActivity.this,"No data found");
+            alertDialog.show();
+        }
+    };
+
+    //Check for more data to be downloaded
+    private void checkMoreNew(SingleCategory category) {
+        for(int i=0;i<category.getData().size();i++){
+            searchList.add(category.getData().get(i));
+        }
+
+        if(category.getNextPageUrl()!=null){
+            pageNoOther = pageNoOther+1;
+            getSearchResult(searchQuery,pageNoOther);
+        } else {
+            if(progressDialog!=null)
+                progressDialog.dismiss();
+            pageNoOther=1;
+            AppConstants.setMasterSearchList(searchList);
+            if(AppConstants.getMasterSearchList().size()>0)
+                setData();
+        }
+    }
+
+    //Set data list to search layout
+    private void setData() {
+        Intent intent = new Intent(MainActivity.this,SearchResultActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        searchList.clear();
+        pageNoOther=1;
+        super.onResume();
+    }
 }

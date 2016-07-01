@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -282,6 +283,12 @@ public class SingleProductActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.other_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
 
