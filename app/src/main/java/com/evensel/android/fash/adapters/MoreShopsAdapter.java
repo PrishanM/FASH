@@ -22,19 +22,21 @@ import java.util.List;
  * @author Prishanm
  * Used for Listview in MORE SHOPS
  */
-public class MoreShopsAdapter extends BaseAdapter {
+public class MoreShopsAdapter extends BaseAdapter{
 
     List<ShopDetail> shopList;
+    List<ShopDetail> displayShopList;
     Context con;
 
     public MoreShopsAdapter(List<ShopDetail> shops,Context context){
         this.con = context;
         this.shopList = shops;
+        this.displayShopList = shops;
     }
 
     @Override
     public int getCount() {
-        return shopList.size();
+        return displayShopList.size();
     }
 
     @Override

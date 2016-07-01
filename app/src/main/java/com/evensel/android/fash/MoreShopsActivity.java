@@ -3,13 +3,17 @@ package com.evensel.android.fash;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,14 +32,14 @@ import java.util.List;
  * Used handle all the events in the MORE SHOPS
  */
 
-public class MoreShopsActivity extends AppCompatActivity {
+public class MoreShopsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     ListView listView;
     Notifications notifications;
     AlertDialog alertDialog;
     MoreShopsAdapter shopsAdapter;
     View loadingSpinnerShops;
-    List<ShopDetail> allShopList;
+    List<ShopDetail> allShopList,mainList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class MoreShopsActivity extends AppCompatActivity {
             loadingSpinnerShops.setVisibility(View.GONE);
             if(allShops.size()>0) {
                 allShopList = allShops;
+                mainList = allShops;
                 shopsAdapter = new MoreShopsAdapter(allShops, MoreShopsActivity.this);
                 listView.setAdapter(shopsAdapter);
             }
@@ -100,6 +105,8 @@ public class MoreShopsActivity extends AppCompatActivity {
         notifications = new Notifications();
         DetectNetwork.setmContext(getApplicationContext());
         allShopList = new ArrayList<ShopDetail>();
+        mainList = new ArrayList<ShopDetail>();
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -117,7 +124,24 @@ public class MoreShopsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.other_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText et = (EditText) findViewById(R.id.search_src_text);
+                et.setText("");
+
+                shopsAdapter = new MoreShopsAdapter(mainList, MoreShopsActivity.this);
+                allShopList = mainList;
+                listView.setAdapter(shopsAdapter);
+            }
+        });
+
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -125,4 +149,40 @@ public class MoreShopsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        //shopsAdapter.getFilter().filter(query);
+        testMethod(query);
+        return false;
+    }
+
+    private void testMethod(String query) {
+        List<ShopDetail> list = new ArrayList<ShopDetail>();
+        for(int i=0;i<mainList.size();i++){
+            if(mainList.get(i).getName().contains(query)){
+                list.add(mainList.get(i));
+            }
+        }
+        allShopList = list;
+        shopsAdapter = new MoreShopsAdapter(list, MoreShopsActivity.this);
+        listView.setAdapter(shopsAdapter);
+
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        List<ShopDetail> list = new ArrayList<ShopDetail>();
+        for(int i=0;i<mainList.size();i++){
+            if(mainList.get(i).getName().contains(newText)){
+                list.add(mainList.get(i));
+            }
+        }
+        allShopList = list;
+        shopsAdapter = new MoreShopsAdapter(list, MoreShopsActivity.this);
+        listView.setAdapter(shopsAdapter);
+        return false;
+    }
+
+
 }
