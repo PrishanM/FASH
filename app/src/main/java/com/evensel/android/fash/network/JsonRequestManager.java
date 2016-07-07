@@ -1,7 +1,6 @@
 package com.evensel.android.fash.network;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -62,34 +61,6 @@ public class JsonRequestManager {
 					.newRequestQueue(mCtx.getApplicationContext());
 		}
 		return mRequestQueue;
-	}
-
-	public <T> void addToRequestQueue(Request<T> req) {
-		if (req.getTag() == null)
-			req.setTag(mCtx.getApplicationContext());
-		getRequestQueue().add(req);
-	}
-
-	/**
-	 * Adds the specified request to the global queue, if tag is specified then
-	 * it is used else Default TAG is used.
-	 * 
-	 * @param req
-	 * @param tag
-	 */
-	public <T> void addToRequestQueue(Request<T> req, String tag) {
-		// set the default tag if tag is empty
-		req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-		/* VolleyLog.d("Adding request to queue: %s", req.getUrl()); */
-		getRequestQueue().add(req);
-	}
-
-	public void cancelPendingRequests() {
-		cancelPendingRequests(mCtx.getApplicationContext());
-	}
-
-	public void cancelPendingRequests(Object tag) {
-		mRequestQueue.cancelAll(tag);
 	}
 
 	/******************************************************************************************************************************************/
@@ -219,8 +190,12 @@ public class JsonRequestManager {
 	public void getProductList(String url,int shopId,int category,int page,
 								  final getProductListRequest callback) {
 
-
-		String fullUrl = url+"shop="+shopId+"&category="+category+"&page="+page;
+		String fullUrl = "";
+		if(shopId!=0){
+			fullUrl = url+"shop="+shopId+"&category="+category+"&page="+page;
+		}else{
+			fullUrl = url+"category="+category+"&page="+page;
+		}
 
 		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
 				new Response.Listener<JSONObject>() {
@@ -273,58 +248,6 @@ public class JsonRequestManager {
 
 
 		String fullUrl = url+"query="+query.replace(" ","+")+"&page="+page;
-
-		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						ObjectMapper mapper = new ObjectMapper();
-						try {
-							Log.d("xxxx", response.toString());
-							SingleCategory categoryProducts = mapper.readValue(response.toString(), SingleCategory.class);
-
-							callback.onSuccess(categoryProducts);
-							mapper = null;
-						} catch (Exception e) {
-							callback.onError(e.getLocalizedMessage());
-						}
-					}
-				}, new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError volleyError) {
-				callback.onError(VolleyErrorHelper.getMessage(volleyError,
-						mCtx));
-			}
-		});
-
-
-		req.setRetryPolicy(new DefaultRetryPolicy(30000,
-				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-		// Adding request to request queue
-		AppController.getInstance().addToRequestQueue(req,
-				tag_json_arry);
-
-	}
-
-
-	/******************************************************************************************************************************************/
-
-	/**
-	 * Get Product list  for Search query(Shopwise) Requests
-	 **/
-	public static interface getShopSearchListRequest {
-		void onSuccess(SingleCategory singleCategory);
-
-		void onError(String status);
-	}
-
-	public void getShopSearchList(String url,String query,int id,int page,
-									final getShopSearchListRequest callback) {
-
-
-		String fullUrl = url+"shop="+id+"&query="+query.replace(" ","+")+"&page="+page;
 
 		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
 				new Response.Listener<JSONObject>() {
@@ -628,6 +551,61 @@ public class JsonRequestManager {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				callback.onError(VolleyErrorHelper.getMessage(error,
+						mCtx));
+			}
+		});
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
+
+
+	/******************************************************************************************************************************************/
+
+	/**
+	 * Get Product list  for Search query(Shopwise - Super category) Requests
+	 **/
+	public static interface getShopSuperCategorySearchListRequest {
+		void onSuccess(SingleCategory singleCategory);
+
+		void onError(String status);
+	}
+
+	public void getShopSuperCategorySearchList(String url,String query,int id,int superCategory,int page,
+										  final getShopSuperCategorySearchListRequest callback) {
+
+		String fullUrl = "";
+		if(superCategory!=0)
+			fullUrl = url+"query="+query.replace(" ","+")+"&shop="+id+"&superCategory="+superCategory+"&page="+page;
+		else
+			fullUrl = url+"query="+query.replace(" ","+")+"&shop="+id+"&page="+page;
+
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, fullUrl, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						ObjectMapper mapper = new ObjectMapper();
+						try {
+
+							SingleCategory categoryProducts = mapper.readValue(response.toString(), SingleCategory.class);
+
+							callback.onSuccess(categoryProducts);
+							mapper = null;
+						} catch (Exception e) {
+							callback.onError("No data.");
+						}
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError volleyError) {
+				callback.onError(VolleyErrorHelper.getMessage(volleyError,
 						mCtx));
 			}
 		});

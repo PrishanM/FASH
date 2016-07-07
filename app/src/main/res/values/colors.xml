@@ -9,6 +9,7 @@
     <color name="price_tag_color">#f27d6f</color>
     <color name="action_bar_dark">#c24f42</color>
     <color name="stock_tag_color">#2ba147</color>
+    <color name="accent_color">#FFEB3B</color>
     <color name="out_of_stock_tag_color">#cf4334</color>
     <color name="normal_text_color">#aaabbc</color>
     <color name="product_background_color">#231f20</color>

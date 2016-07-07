@@ -4,13 +4,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.evensel.android.fash.adapters.ProductListAdapter;
@@ -29,18 +31,17 @@ import java.util.List;
  * @author Prishanm
  * Used handle all the events in the Product List
  */
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    String shopName,categoryName;
+    String categoryName;
     int shopId,categoryId;
     int pageNo=1;
     List<Datum> productList = new ArrayList<Datum>();
-    TextView txtHeading;
     ListView listProductList;
     Notifications notifications;
     AlertDialog alertDialog;
     View loadingSpinner;
-    SearchView searchView;
+    //SearchView searchView;
     ProgressDialog progressDialog;
     int pageNoOther=1;
     String searchQuery="";
@@ -55,7 +56,6 @@ public class ProductsActivity extends AppCompatActivity {
         categoryId = getIntent().getExtras().getInt("ID");
         categoryName = getIntent().getStringExtra("TITLE");
         shopId = getIntent().getExtras().getInt("SHOP_ID");
-        shopName = getIntent().getStringExtra("SHOP_NAME");
 
         final ActionBar abar = getSupportActionBar();
         View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar_text, null);
@@ -167,25 +167,6 @@ public class ProductsActivity extends AppCompatActivity {
         listProductList = (ListView)findViewById(R.id.listProducts);
         loadingSpinner = (View)findViewById(R.id.loadingSpinner);
 
-        searchView = (SearchView)findViewById(R.id.searchItems);
-        searchView.setQueryHint("Search "+categoryName.toLowerCase()+" in "+shopName.toLowerCase());
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                progressDialog = ProgressDialog.show(ProductsActivity.this, null,
-                        "Searching Data...", true);
-                progressDialog.setCancelable(true);
-                searchQuery = query;
-                getSearchResult(searchQuery, pageNoOther);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
     }
 
     //Requesting SEARCH DATA
@@ -228,19 +209,6 @@ public class ProductsActivity extends AppCompatActivity {
             searchList.add(category.getData().get(i));
         }
 
-        //Only for testing
-        /*pageNo = pageNo +1;
-        if(pageNo<4){
-            getSearchResult(searchQuery,1);
-        }else{
-            if(progressDialog!=null)
-                progressDialog.dismiss();
-            pageNo=1;
-            AppConstants.setMasterSearchList(searchList);
-            if(AppConstants.getMasterSearchList().size()>0)
-                setDataList();
-        }*/
-
         if(category.getNextPageUrl()!=null){
             pageNoOther = pageNoOther+1;
             getSearchResult(searchQuery,pageNoOther);
@@ -256,8 +224,6 @@ public class ProductsActivity extends AppCompatActivity {
 
     //Set data list to search layout
     private void setData() {
-
-        Log.d("test", AppConstants.getMasterSearchList().size() + "");
         Intent intent = new Intent(ProductsActivity.this,SearchResultActivity.class);
         startActivity(intent);
     }
@@ -267,5 +233,42 @@ public class ProductsActivity extends AppCompatActivity {
         searchList.clear();
         pageNoOther=1;
         super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_search:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        progressDialog = ProgressDialog.show(ProductsActivity.this, null,
+                "Searching Data...", true);
+        progressDialog.setCancelable(true);
+        searchQuery = query;
+        getSearchResult(searchQuery, pageNoOther);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

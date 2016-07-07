@@ -8,21 +8,20 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.evensel.android.fash.AppController;
 import com.evensel.android.fash.MoreShopsActivity;
 import com.evensel.android.fash.R;
-import com.evensel.android.fash.ShopActivity;
+import com.evensel.android.fash.adapters.HomeShopListAdapter;
 import com.evensel.android.fash.adapters.PagerAdapter;
-import com.evensel.android.fash.commons.AppConstants;
 import com.evensel.android.fash.commons.Notifications;
 import com.evensel.android.fash.network.DetectNetwork;
 import com.evensel.android.fash.network.JsonRequestManager;
@@ -31,6 +30,7 @@ import com.evensel.android.fash.util.ShopDetail;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,9 +41,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private ViewPager mViewPager = null;
     private CirclePageIndicator circlePageIndicator = null;
     private PagerAdapter pagerAdapter;
+    HomeShopListAdapter homeShopListAdapter;
     List<Fragment> fList = null;
-    ImageView imageView1,imageView2,imageView3,imageView4,imageView5,imageView6,imageView7,imageView8;
-    CardView layout1,layout2,layout3,layout4,layout5,layout6,layout7,layout8;
+    ListView listView;
     FloatingActionButton btnMore;
     Notifications notifications;
     AlertDialog alertDialog;
@@ -80,8 +80,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mViewPager = (ViewPager)rootView.findViewById(R.id.featuredViewPager);
         loadingSpinnerProducts = (View)rootView.findViewById(R.id.loadingSpinnerProducts);
         loadingSpinnerShops = (View)rootView.findViewById(R.id.loadingSpinnerShops);
+        listView = (ListView)rootView.findViewById(R.id.shopListView);
 
-        imageView1 = (ImageView)rootView.findViewById(R.id.imgView1);
+        /*imageView1 = (ImageView)rootView.findViewById(R.id.imgView1);
         imageView2 = (ImageView)rootView.findViewById(R.id.imgView2);
         imageView3 = (ImageView)rootView.findViewById(R.id.imgView3);
         imageView4 = (ImageView)rootView.findViewById(R.id.imgView4);
@@ -97,16 +98,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         layout5 = (CardView)rootView.findViewById(R.id.layout5);
         layout6 = (CardView)rootView.findViewById(R.id.layout6);
         layout7 = (CardView)rootView.findViewById(R.id.layout7);
-        layout8 = (CardView)rootView.findViewById(R.id.layout8);
+        layout8 = (CardView)rootView.findViewById(R.id.layout8);*/
 
         btnMore = (FloatingActionButton)rootView.findViewById(R.id.fabMoreShops);
 
-        imageView1.setOnClickListener(this);
+        /*imageView1.setOnClickListener(this);
         imageView2.setOnClickListener(this);
         imageView3.setOnClickListener(this);
         imageView4.setOnClickListener(this);
         imageView5.setOnClickListener(this);
-        imageView6.setOnClickListener(this);
+        imageView6.setOnClickListener(this);*/
         btnMore.setOnClickListener(this);
     }
 
@@ -166,7 +167,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     //Set featured shops data
     private void setShopsData(List<ShopDetail> data) {
 
-        if(data.size()>0){
+        HashMap<Integer,List<ShopDetail>> listHashMap = new HashMap<Integer,List<ShopDetail>>();
+        int arraySize = (int)Math.ceil(data.size()/4.0);
+
+        for (int i=0;i<arraySize;i++){
+            int position = (i*4);
+            List<ShopDetail> tmpList = new ArrayList<ShopDetail>();
+
+            if((position+0)<data.size()){
+                tmpList.add(data.get(position+0));
+            }
+            if((position+1)<data.size()){
+                tmpList.add(data.get(position+1));
+            }
+            if((position+2)<data.size()){
+                tmpList.add(data.get(position+2));
+            }
+            if((position+3)<data.size()){
+                tmpList.add(data.get(position+3));
+            }
+            listHashMap.put(i, tmpList);
+        }
+
+        homeShopListAdapter = new HomeShopListAdapter(getActivity(),listHashMap);
+        listView.setAdapter(homeShopListAdapter);
+
+        /*if(data.size()>0){
             for (int i=0;i<data.size();i++){
                 switch (i){
                     case 0:
@@ -205,7 +231,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
 
             }
-        }
+        }*/
 
     }
 
@@ -351,7 +377,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Intent moreShopsIntent = new Intent(getActivity(),MoreShopsActivity.class);
                 startActivity(moreShopsIntent);
                 break;
-            case R.id.imgView1:
+            /*case R.id.imgView1:
                 AppConstants.setShopDetail(dataList.get(0));
                 Intent shopActivity1 = new Intent(getActivity(),ShopActivity.class);
                 startActivity(shopActivity1);
@@ -390,7 +416,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 AppConstants.setShopDetail(dataList.get(7));
                 Intent shopActivity8 = new Intent(getActivity(),ShopActivity.class);
                 startActivity(shopActivity8);
-                break;
+                break;*/
         }
     }
 

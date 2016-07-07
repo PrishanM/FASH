@@ -98,7 +98,7 @@ public class ProductListAdapter extends BaseAdapter {
                 }
             });
             txtName1.setText(listHashMap.get(position).get(0).getTitle());
-            txtPrice1.setText(listHashMap.get(position).get(0).getPrice());
+            txtPrice1.setText("$ "+listHashMap.get(position).get(0).getPrice());
         }
         if(arraySize>=2){
             layout2.setVisibility(View.VISIBLE);
@@ -118,7 +118,7 @@ public class ProductListAdapter extends BaseAdapter {
                 }
             });
             txtName2.setText(listHashMap.get(position).get(1).getTitle());
-            txtPrice2.setText(listHashMap.get(position).get(1).getPrice());
+            txtPrice2.setText("$ "+listHashMap.get(position).get(1).getPrice());
         }
         if(arraySize==3){
             layout3.setVisibility(View.VISIBLE);
@@ -138,7 +138,7 @@ public class ProductListAdapter extends BaseAdapter {
                 }
             });
             txtName3.setText(listHashMap.get(position).get(2).getTitle());
-            txtPrice3.setText(listHashMap.get(position).get(2).getPrice());
+            txtPrice3.setText("$ "+listHashMap.get(position).get(2).getPrice());
         }
 
         layout1.setOnClickListener(new View.OnClickListener() {
