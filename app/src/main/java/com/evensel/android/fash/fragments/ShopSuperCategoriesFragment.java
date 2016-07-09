@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.evensel.android.fash.LoginActivity;
 import com.evensel.android.fash.R;
 import com.evensel.android.fash.SearchResultActivity;
 import com.evensel.android.fash.adapters.ShopSuperCategorySubCategoriesAdapter;
@@ -209,5 +210,17 @@ public class ShopSuperCategoriesFragment extends Fragment implements SearchView.
     private void setData() {
         Intent intent = new Intent(getActivity(),SearchResultActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

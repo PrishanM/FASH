@@ -105,15 +105,37 @@
                 android:value="com.evensel.android.fash.LocationActivity" />
         </activity>
 
-        <!-- Other key -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBEvGuBazDOC3vgt56qUloXfa66NfS_l8U" />
+        <activity
+            android:name="com.evensel.android.fash.LoginActivity"
+            android:label="LOGIN"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
 
-        <!-- Home Key -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.LoginActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.UserRegistrationStepOneActivity"
+            android:label="USER REGISTRATION"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.UserRegistrationStepOneActivity" />
+        </activity>
+
+        <!-- Other key -->
         <!--<meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAio1FzPb-j_p5divAHzJSnkk8f6UK5UGU" />-->
+            android:value="AIzaSyBEvGuBazDOC3vgt56qUloXfa66NfS_l8U" />-->
+
+        <!-- Home Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAio1FzPb-j_p5divAHzJSnkk8f6UK5UGU" />
 
 
     </application>

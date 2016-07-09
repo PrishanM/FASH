@@ -247,8 +247,10 @@ public class ProductsActivity extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_search:
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                Intent intent = new Intent(ProductsActivity.this,LoginActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

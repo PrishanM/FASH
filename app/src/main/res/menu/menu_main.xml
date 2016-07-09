@@ -9,4 +9,11 @@
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
+    <item android:id="@+id/action_profile"
+        android:title="User Account"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_user_profile"/>
+
+
 </menu>
