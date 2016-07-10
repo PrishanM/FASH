@@ -127,6 +127,28 @@
                 android:value="com.evensel.android.fash.UserRegistrationStepOneActivity" />
         </activity>
 
+        <activity
+            android:name="com.evensel.android.fash.UserRegistrationStepTwoActivity"
+            android:label="USER REGISTRATION"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.UserRegistrationStepTwoActivity" />
+        </activity>
+
+        <activity
+            android:name="com.evensel.android.fash.UserRegistrationStepThreeActivity"
+            android:label="USER REGISTRATION"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.UserRegistrationStepThreeActivity" />
+        </activity>
+
         <!-- Other key -->
         <!--<meta-data
             android:name="com.google.android.geo.API_KEY"

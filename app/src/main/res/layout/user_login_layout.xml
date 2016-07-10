@@ -19,12 +19,22 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3.2"
         android:weightSum="3.2"
         android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,7 +146,9 @@
                 android:id="@+id/txtForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/string_forgot_password"/>
+                android:text="@string/string_forgot_password"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/heading_text_color"/>
 
 
         </LinearLayout>
@@ -155,7 +167,9 @@
             android:id="@+id/txtRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/string_signup"/>
+            android:text="@string/string_signup"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/heading_text_color"/>
 
     </LinearLayout>
 

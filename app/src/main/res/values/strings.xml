@@ -16,6 +16,27 @@
     <string name="string_forgot_password"><u>Forgot Password?</u></string>
     <string name="string_signup">Don\'t have an account? <u>Register!</u></string>
 
+    <!-- User Registration - Billing address & Delivery Address-->
+    <string name="string_billing_address">Billing Address</string>
+    <string name="string_delivery_address">Delivery Address</string>
+    <string name="string_address_line1">Address Line 1</string>
+    <string name="string_address_line2">Address Line 2</string>
+    <string name="string_city">City</string>
+    <string name="string_province">Province</string>
+    <string-array name="province_array">
+        <item>-- Select the Province --</item>
+        <item>Western</item>
+        <item>Southern</item>
+        <item>Northern</item>
+        <item>Eastern</item>
+        <item>Sabaragamuwa</item>
+        <item>North Western</item>
+        <item>Uva</item>
+        <item>Central</item>
+        <item>North Central</item>
+    </string-array>
+    <string name="string_address_number">Number</string>
+
     <!-- Main Tab -->
     <string name="string_home">Home</string>
     <string name="string_men">Men</string>
