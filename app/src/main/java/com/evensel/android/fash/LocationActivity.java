@@ -63,7 +63,7 @@ public class LocationActivity extends AppCompatActivity {
         if (googleMap == null) {
             googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                     R.id.map)).getMap();
-            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            //googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
@@ -94,6 +94,11 @@ public class LocationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initilizeMap();
+        try {
+            initilizeMap();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
