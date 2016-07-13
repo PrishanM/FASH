@@ -34,6 +34,98 @@
                 android:weightSum="4.7"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/textview_drawable"
+                    android:layout_marginLeft="@dimen/margin_items"
+                    android:layout_marginRight="@dimen/margin_items"
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/txtPhoneNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/string_phone_number"
+                        android:inputType="phone"
+                        android:textColorHint="@color/txt_color_white"/>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/textview_drawable"
+                    android:layout_marginLeft="@dimen/margin_items"
+                    android:layout_marginRight="@dimen/margin_items"
+                    android:weightSum="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:background="@android:color/transparent"
+                        android:textColor="@color/txt_color_white"
+                        android:text="Gender"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/text_size_heading"/>
+
+                    <RadioGroup
+                        android:id="@+id/radioSex"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="0.6"
+                        android:gravity="center_vertical"
+                        android:weightSum="1">
+
+                        <RadioButton
+                            android:id="@+id/radioMale"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Male"
+                            android:textColor="@color/txt_color_white"
+                            android:layout_weight="0.5"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radioFemale"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:textColor="@color/txt_color_white"
+                            android:layout_height="wrap_content"
+                            android:text="Female" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"/>
+
+
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="match_parent"
@@ -50,6 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.2"/>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -174,7 +267,7 @@
                     android:id="@+id/nxtLayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1.5"
+                    android:layout_weight="0.1"
                     android:weightSum="1"
                     android:orientation="horizontal">
 

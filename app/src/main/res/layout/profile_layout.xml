@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background_layout_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:background="@color/search_bar_color">
+
+            <TextView
+                android:id="@+id/tabMyProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_my_profile"
+                android:gravity="center"
+                android:textColor="@color/heading_text_color"
+                android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/tabOrderHistory"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_order_history"
+                android:gravity="center"
+                android:textColor="@color/heading_text_color"
+                android:layout_margin="6dp"/>
+            <TextView
+                android:id="@+id/tabMessages"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/string_notifications"
+                android:gravity="center"
+                android:textColor="@color/heading_text_color"
+                android:layout_margin="6dp"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/profileMainTab"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.0">
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

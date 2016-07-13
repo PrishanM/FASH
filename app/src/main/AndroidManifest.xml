@@ -149,6 +149,17 @@
                 android:value="com.evensel.android.fash.UserRegistrationStepThreeActivity" />
         </activity>
 
+        <activity
+            android:name="com.evensel.android.fash.ProfileActivity"
+            android:label="PROFILE"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evensel.android.fash.ProfileActivity" />
+        </activity>
+
         <!-- Other key -->
         <!--<meta-data
             android:name="com.google.android.geo.API_KEY"

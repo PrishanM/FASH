@@ -120,7 +120,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"
+            android:layout_weight="0.5"
             android:layout_marginLeft="@dimen/margin_items"
             android:layout_marginRight="@dimen/margin_items"
             android:textColor="@color/txt_color_white"

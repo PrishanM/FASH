@@ -20,6 +20,7 @@
     <string name="string_billing_address">Billing Address</string>
     <string name="string_delivery_address">Delivery Address</string>
     <string name="string_address_line1">Address Line 1</string>
+    <string name="string_phone_number">Phone Number</string>
     <string name="string_address_line2">Address Line 2</string>
     <string name="string_city">City</string>
     <string name="string_province">Province</string>
@@ -44,6 +45,11 @@
     <string name="string_kids">Kids</string>
     <string name="string_accessories">Accessories</string>
     <string name="string_about">About</string>
+
+    <!-- Profile Tabs -->
+    <string name="string_my_profile">My Profile</string>
+    <string name="string_order_history">Order History</string>
+    <string name="string_notifications">Notifications</string>
 
     <!-- App URL -->
     <string name="base_url">http://192.241.191.200/api/v1/</string>

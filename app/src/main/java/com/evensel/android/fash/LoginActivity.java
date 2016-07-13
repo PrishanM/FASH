@@ -7,14 +7,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Created by Prishan Maduka on 7/9/2016.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView forgotPassword,register;
+    Button btnLogin;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +41,24 @@ public class LoginActivity extends AppCompatActivity {
 
         forgotPassword = (TextView)findViewById(R.id.txtForgotPassword);
         register = (TextView)findViewById(R.id.txtRegister);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,UserRegistrationStepOneActivity.class);
-                startActivity(intent);
-                //overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out);
-            }
-        });
+        btnLogin.setOnClickListener(this);
+        register.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.btnLogin){
+            Intent loginIntent = new Intent(LoginActivity.this,ProfileActivity.class);
+            startActivity(loginIntent);
+        }else if(v.getId()==R.id.txtRegister){
+            Intent intent = new Intent(LoginActivity.this,UserRegistrationStepOneActivity.class);
+            startActivity(intent);
+        }else if(v.getId()==R.id.txtForgotPassword){
+
+        }
     }
 }

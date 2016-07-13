@@ -44,4 +44,5 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
 }
