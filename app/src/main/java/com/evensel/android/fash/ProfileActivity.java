@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.evensel.android.fash.fragments.MyProfileFragment;
+import com.evensel.android.fash.fragments.OrderHistoryFragment;
 
 /**
  * Created by Prishan Maduka on 7/13/2016.
@@ -71,6 +72,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.tabMyProfile){
+
+            setFragment(new MyProfileFragment(),"0");
             tabProfile.setBackgroundResource(R.drawable.tab_selected);
             tabProfile.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -81,6 +84,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             tabNotifications.setTextColor(getResources().getColor(R.color.heading_text_color));
 
         }else if(v.getId()==R.id.tabOrderHistory){
+
+            setFragment(new OrderHistoryFragment(),"1");
+
             tabOrder.setBackgroundResource(R.drawable.tab_selected);
             tabOrder.setTextColor(Color.parseColor("#FFFFFF"));
 
