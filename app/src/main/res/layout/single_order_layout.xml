@@ -45,7 +45,7 @@
                         <FrameLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.4" >
+                            android:layout_weight="0.5" >
 
                             <com.viewpagerindicator.CirclePageIndicator
                                 android:id="@+id/indicator"
@@ -59,7 +59,7 @@
                             android:id="@+id/product_pagination_layout"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.2" >
+                            android:layout_weight="1" >
 
                             <android.support.v4.view.ViewPager
                                 android:id="@+id/productViewPager"
@@ -73,7 +73,7 @@
                             android:padding="4dp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.4"
+                            android:layout_weight="0.5"
                             android:layout_gravity="bottom"
                             android:textSize="@dimen/text_size_normal"
                             android:textColor="@color/description_text"
@@ -164,7 +164,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:textStyle="bold"
+                            android:text="15-07-2016"/>
 
                     </LinearLayout>
 
@@ -194,6 +195,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
+                            android:textStyle="bold"
                             android:text="Delivered"/>
 
                     </LinearLayout>
@@ -223,7 +225,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:textStyle="bold"
+                            android:text="5"/>
 
                     </LinearLayout>
 
@@ -252,7 +255,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:textStyle="bold"
+                            android:text="$90.00"/>
 
                     </LinearLayout>
 
@@ -281,16 +285,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:textStyle="bold"
+                            android:text="$7.00"/>
 
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/normal_text_color"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -303,81 +301,60 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.75"
-                            android:text="Order status"
-                            android:layout_margin="@dimen/activity_horizontal_margin"/>
+                            android:gravity="center_vertical"
+                            android:text="Total( Price + Delivery Cost )"
+                            android:textSize="@dimen/text_size_heading"
+                            android:textColor="@color/txt_color_white"
+                            android:background="@drawable/left_cornered"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:padding="@dimen/margin_textview"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:gravity="center_vertical|left"
+                            android:text="$97.00"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/text_size_heading"
+                            android:textColor="@color/txt_color_white"
+                            android:background="@drawable/right_cornered"
+                            android:layout_marginTop="@dimen/activity_horizontal_margin"
+                            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:padding="@dimen/margin_textview"/>
 
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/normal_text_color"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:weightSum="1"
-                        android:gravity="center_vertical">
+                        android:gravity="center">
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <ImageView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.75"
-                            android:text="Order status"
+                            android:src="@drawable/ic_call_center"
                             android:layout_margin="@dimen/activity_horizontal_margin"/>
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:text="Delivered"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/normal_text_color"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.75"
-                            android:text="Order status"
+                            android:text="Inquiries"
+                            android:textColor="@color/price_tag_color"
                             android:layout_margin="@dimen/activity_horizontal_margin"/>
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.25"
-                            android:text="Delivered"/>
+                            android:text="0717966770"
+                            android:layout_margin="@dimen/activity_horizontal_margin"/>
 
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/normal_text_color"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 
 
