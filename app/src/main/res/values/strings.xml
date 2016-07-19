@@ -51,6 +51,9 @@
     <string name="string_order_history">Order History</string>
     <string name="string_notifications">Notifications</string>
 
+    <!-- Payment Tabs -->
+    <string name="string_quantity">Quantity</string>
+
     <!-- App URL -->
     <string name="base_url">http://192.241.191.200/api/v1/</string>
     <string name="featured_products_url">products/featured?</string>

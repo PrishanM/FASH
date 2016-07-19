@@ -1,0 +1,489 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_layout_color"
+            android:weightSum="6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:weightSum="6"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_items"
+                    android:layout_marginRight="@dimen/margin_items"
+                    android:background="@android:color/transparent"
+                    android:text="@string/string_delivery_address"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/heading_text_color"/>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/textview_white_drawable"
+                    android:layout_marginLeft="@dimen/margin_items"
+                    android:layout_marginRight="@dimen/margin_items"
+                    android:weightSum="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent" />
+
+                    <RadioGroup
+                        android:id="@+id/radioSex"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:weightSum="1">
+
+                        <RadioButton
+                            android:id="@+id/radioOldAddres"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Saved address"
+                            android:textColor="@color/normal_text_color"
+                            android:layout_weight="0.5"
+                            android:checked="true"
+                            android:onClick="onRadioButtonClicked"/>
+
+                        <RadioButton
+                            android:id="@+id/radioNewAddress"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:textColor="@color/normal_text_color"
+                            android:layout_height="wrap_content"
+                            android:text="New address"
+                            android:onClick="onRadioButtonClicked"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"/>
+
+                <LinearLayout
+                    android:id="@+id/newDelAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4.2"
+                    android:orientation="vertical"
+                    android:weightSum="4.2"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/txtAddOne"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/string_address_line1"
+                            android:textColorHint="@color/normal_text_color"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/txtAddTwo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/string_address_line2"
+                            android:textColorHint="@color/normal_text_color"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/txtCity"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/string_city"
+                            android:textColorHint="@color/normal_text_color"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <Space
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent" />
+
+                        <Spinner
+                            android:id="@+id/province_spinner"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:spinnerMode="dropdown"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <Space
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent" />
+
+                        <Spinner
+                            android:id="@+id/nearest_spinner"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:spinnerMode="dropdown"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/textview_white_drawable"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/txtPhone"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:inputType="phone"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/string_phone_number"
+                            android:textColorHint="@color/normal_text_color"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/idScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4.2"
+                    android:orientation="vertical"
+                    android:weightSum="4.2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:background="@android:color/transparent"
+                        android:text="Pick Delivery Option"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/heading_text_color"/>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent" />
+
+                        <RadioGroup
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:weightSum="1">
+
+                            <RadioButton
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Store Pickup"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_weight="0.5"
+                                android:checked="true"/>
+
+                            <RadioButton
+                                android:layout_width="0dp"
+                                android:layout_weight="0.5"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_height="wrap_content"
+                                android:text="Delivery"/>
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="1"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Terms and conditions"
+                            android:textColor="@color/normal_text_color"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:background="@android:color/transparent"
+                        android:text="Payment Options"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/heading_text_color"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:layout_marginLeft="44dp"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:weightSum="4"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical|left">
+
+                        <RadioGroup
+                            android:id="@+id/paymentOption"
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:weightSum="4">
+
+                            <RadioButton
+                                android:id="@+id/creditCard"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Credit Card"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_weight="1"
+                                android:checked="true" />
+
+                            <RadioButton
+                                android:id="@+id/mobitelBill"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_height="wrap_content"
+                                android:text="Mobitel Add to Bill" />
+
+                            <RadioButton
+                                android:id="@+id/dialogBill"
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_height="wrap_content"
+                                android:text="Dialog Add to Bill" />
+
+                            <RadioButton
+                                android:id="@+id/onDelivery"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cash on Delivery"
+                                android:textColor="@color/normal_text_color"
+                                android:layout_weight="1" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnPayment"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="@dimen/margin_items"
+                        android:layout_marginRight="@dimen/margin_items"
+                        android:textColor="@color/txt_color_white"
+                        android:text="Pay"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_size_heading"
+                        android:background="@drawable/tab_selected"/>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:id="@+id/nxtLayout"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/goNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            android:src="@drawable/ic_down"
+            app:layout_anchor="@id/nxtLayout"
+            app:layout_anchorGravity="bottom|right|end"
+            app:backgroundTint="@color/price_tag_color"
+            app:rippleColor="#FFFFFF"
+            android:visibility="gone"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

@@ -29,12 +29,12 @@ import java.util.List;
  * @author Prishanm
  * Used handle Single Products
  */
-public class SingleProductActivity extends AppCompatActivity {
+public class SingleProductActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager mViewPager = null;
     private CirclePageIndicator circlePageIndicator = null;
     private PagerAdapter pagerAdapter;
-    TextView txtName,txtPrice,txtStock,txtDescription,txtLocations,txtSize1,txtSize2,txtSize3,txtSize4,txtSize5,txtSize6,txtSize7,txtCode;
+    TextView txtName,txtPrice,txtStock,txtDescription,txtLocations,txtSize1,txtSize2,txtSize3,txtSize4,txtSize5,txtSize6,txtSize7,txtCode,txtBuy;
     List<Fragment> fList = null;
     ArrayList<String> locationNames = new ArrayList<String>();
     ArrayList<String> locationLatitudes = new ArrayList<String>();
@@ -89,6 +89,7 @@ public class SingleProductActivity extends AppCompatActivity {
         loadingSpinner = (View) findViewById(R.id.loadingSpinner);
         txtName = (TextView)findViewById(R.id.txtName);
         txtPrice = (TextView)findViewById(R.id.txtPrice);
+        txtBuy = (TextView)findViewById(R.id.txtBuy);
         txtCode = (TextView)findViewById(R.id.txtCode);
         txtStock = (TextView)findViewById(R.id.txtStock);
         txtDescription = (TextView)findViewById(R.id.txtDescription);
@@ -104,16 +105,8 @@ public class SingleProductActivity extends AppCompatActivity {
 
 
 
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(SingleProductActivity.this, LocationActivity.class);
-                intent.putStringArrayListExtra("NAME",locationNames);
-                intent.putStringArrayListExtra("LONGITUDE",locationLongitudes);
-                intent.putStringArrayListExtra("LATITUDE",locationLatitudes);
-                startActivity(intent);
-            }
-        });
+        btnMap.setOnClickListener(this);
+        txtBuy.setOnClickListener(this);
 
     }
 
@@ -289,6 +282,27 @@ public class SingleProductActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.other_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.txtBuy){
+            try{
+                if(txtStock.getText().toString().equalsIgnoreCase("In Stock")){
+                    Intent paymentIntent = new Intent(SingleProductActivity.this,PaymentActivity.class);
+                    startActivity(paymentIntent);
+                }
+            }catch (NullPointerException e){
+
+            }
+
+        }else if(v.getId()==R.id.fabLocation){
+            Intent intent= new Intent(SingleProductActivity.this, LocationActivity.class);
+            intent.putStringArrayListExtra("NAME",locationNames);
+            intent.putStringArrayListExtra("LONGITUDE",locationLongitudes);
+            intent.putStringArrayListExtra("LATITUDE",locationLatitudes);
+            startActivity(intent);
+        }
     }
 }
 
