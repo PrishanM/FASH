@@ -42,4 +42,19 @@ public class Notifications {
 
         return dialog;
     }
+
+    //Input errors - HTTP Requests
+    public AlertDialog showHttpInputErrorDialog(Context context,String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Please fix these errors!");
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+
+        return dialog;
+    }
 }

@@ -54,13 +54,24 @@
     <!-- Payment Tabs -->
     <string name="string_quantity">Quantity</string>
 
+    <!-- Error Messages -->
+    <string name="empty_first_name">First name cannot be empty</string>
+    <string name="empty_last_name">Last name cannot be empty</string>
+    <string name="empty_email">Email address cannot be empty</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="empty_password">Password cannot be empty</string>
+    <string name="empty_confirm_password">Confirmation password cannot be empty</string>
+    <string name="invalid_confirm_password">Confirmation password does not match</string>
+
     <!-- App URL -->
     <string name="base_url">http://192.241.191.200/api/v1/</string>
+    <string name="live_url">https://fash.lk/api/v1/</string>
     <string name="featured_products_url">products/featured?</string>
     <string name="featured_shops_url">shops/featured</string>
     <string name="single_product_url">products/</string>
     <string name="categories_url">categories?</string>
     <string name="shop_super_categories_url">superCategories?</string>
     <string name="category_products_url">search?</string>
+
 
 </resources>

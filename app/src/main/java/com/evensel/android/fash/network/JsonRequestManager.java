@@ -3,7 +3,9 @@ package com.evensel.android.fash.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,13 +20,18 @@ import com.evensel.android.fash.util.ShopDetail;
 import com.evensel.android.fash.util.SingleCategory;
 import com.evensel.android.fash.util.SingleProduct;
 import com.evensel.android.fash.util.SuperCategory;
+import com.evensel.android.fash.util.UserCreateResponse;
+import com.evensel.android.fash.util.UserPersonalInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author prishanm 06/01/2016
@@ -218,7 +225,12 @@ public class JsonRequestManager {
 				callback.onError(VolleyErrorHelper.getMessage(volleyError,
 						mCtx));
 			}
-		});
+		}){
+			@Override
+			protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+				return super.parseNetworkResponse(response);
+			}
+		};
 
 
 		req.setRetryPolicy(new DefaultRetryPolicy(30000,
@@ -623,5 +635,73 @@ public class JsonRequestManager {
 
 
 	/******************************************************************************************************************************************/
+
+	/**
+	 * Register User Requests
+	 **/
+	public static interface registerUserRequest {
+		void onSuccess(UserCreateResponse userCreateResponse);
+
+		void onError(UserCreateResponse userCreateResponse);
+	}
+
+	public void registerUser(String url, UserPersonalInfo info,final registerUserRequest callback) {
+
+
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("firstName",info.getFirstName());
+		params.put("lastName",info.getLastName());
+		params.put("email",info.getEmail());
+		params.put("password",info.getPassword());
+		params.put("password_confirmation",info.getConPassword());
+
+		JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				ObjectMapper mapper = new ObjectMapper();
+				UserCreateResponse personalInfo;
+				try{
+					personalInfo = mapper.readValue(response.toString(), UserCreateResponse.class);
+					callback.onSuccess(personalInfo);
+					mapper = null;
+				}catch (Exception e) {
+					personalInfo = new UserCreateResponse();
+					personalInfo.setMessage("Error");
+					callback.onError(personalInfo);
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				if(error.networkResponse.data!=null){
+					ObjectMapper mapper = new ObjectMapper();
+					try{
+						UserCreateResponse personalInfo = mapper.readValue(new String(error.networkResponse.data), UserCreateResponse.class);
+						callback.onError(personalInfo);
+						mapper = null;
+					}catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}){
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				HashMap<String, String> headers = new HashMap<String, String>();
+				headers.put("Content-Type", "application/json; charset=utf-8");
+				return headers;
+			}
+		};
+
+
+		req.setRetryPolicy(new DefaultRetryPolicy(30000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(req,
+				tag_json_arry);
+
+	}
 	
 }
